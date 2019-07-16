@@ -343,7 +343,11 @@ class AuthenticatedClient(object):
         jobs, error = self.jobs(*args, **kwargs)
         killed = []
         errors = []
-        for job_number, job in jobs.iteritems():
+        try:
+            items = jobs.iteritems
+        except AttributeError:
+            items = jobs.items
+        for job_number, job in items():
             result, error = self.terminate(number=job_number)
             if error:
                 errors.append({'number': error})
@@ -354,7 +358,11 @@ class AuthenticatedClient(object):
         jobs, errors = self.jobs(*args, **kwargs)
         killed = []
         errors = []
-        for job_number, job in jobs.iteritems():
+        try:
+            items = jobs.iteritems
+        except AttributeError:
+            items = jobs.items
+        for job_number, job in items():
             result, error = self.shutdown(number=job_number)
             if error:
                 errors.append({'number': error})

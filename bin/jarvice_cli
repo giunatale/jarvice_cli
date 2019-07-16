@@ -100,7 +100,11 @@ def cli_summary(parser, client):
     summary = []
     summary_errors = []
     if not errors:
-        for job_number, detail in result.iteritems():
+        try:
+            items = result.iteritems
+        except AttributeError:
+            items = result.items
+        for job_number, detail in items():
             item = OrderedDict()
             item['job_number'] = job_number
             item['job_name'] = detail['job_name']
@@ -274,7 +278,11 @@ def _call_jarvice_api(parser, command, method, *args, **kwargs):
     args_dict = vars(args)
     proxy_args = ['name', 'number', 'lines', 'action', 'job']
     api_kwargs = dict()
-    for key, value in args_dict.iteritems():
+    try:
+        items = args_dict.iteritems
+    except AttributeError:
+        items = args_dict.items
+    for key, value in items():
         if key in proxy_args and value is not None:
             api_kwargs.update({key: value})
     return method(**api_kwargs)
