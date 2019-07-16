@@ -372,7 +372,7 @@ def main():
     except Exception as e:
         logger.critical("%s" % " ".join(sys.argv[:]))
         logger.critical("An unknown error as occurred %s. Please report this "
-                        "to support@nimbix.net if it persists." % e.message,
+                        "to support@nimbix.net if it persists." % e,
                         exc_info=True)
         sys.exit(1)
 
