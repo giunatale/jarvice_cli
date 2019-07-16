@@ -41,7 +41,7 @@ try:
     import ConfigParser
 except ModuleNotFoundError:
     # Python3
-    from configparser import ConfigParser
+    import configparser as ConfigParser
 import simplejson as json
 from collections import OrderedDict
 
