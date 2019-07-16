@@ -87,7 +87,7 @@ class JsonOrStringAction(argparse.Action):
             setattr(namespace, self.dest, job_dict)
         except Exception as e:
             logger.critical("Exception parsing json command line input: %s"
-                            % e.message)
+                            % e)
             raise ValueError('Invalid JSON format for argument')
 
 
@@ -349,7 +349,7 @@ def cli_jarvice(args, api_args, parser):
         try:
             cli_upload(parser)
         except exceptions.UploadException as e:
-            logging.error(e.message)
+            logging.error(e)
             sys.exit(1)
     elif command == 'ls':
         cli_ls(parser)
